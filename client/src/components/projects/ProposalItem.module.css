@@ -1,0 +1,115 @@
+.item {
+  background-color: var(--bg-deep);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.userInfo {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.userName {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--accent-highlight);
+  font-size: 1rem;
+}
+
+.userMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.bidInfo {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.bidItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.bidIcon {
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.bidValue {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--accent-soft);
+}
+
+.body {
+  margin-bottom: 1.25rem;
+}
+
+.coverLetter {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.actionBtn {
+  gap: 0.4rem;
+}
+
+.statusBadge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.accepted { color: var(--rank-junior); }
+.rejected { color: var(--rank-architect); }
+.pending { color: var(--text-muted); }

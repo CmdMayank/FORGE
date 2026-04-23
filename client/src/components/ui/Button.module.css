@@ -1,0 +1,98 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition), border-color var(--transition), color var(--transition);
+  font-family: var(--font-body);
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+.primary {
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.primary:hover {
+  background-color: var(--accent-soft);
+}
+
+.secondary {
+  background-color: transparent;
+  border-color: var(--border-subtle);
+  color: var(--accent-soft);
+}
+
+.secondary:hover {
+  border-color: var(--accent);
+  background-color: rgba(133, 79, 108, 0.1);
+}
+
+.outline {
+  background-color: transparent;
+  border-color: var(--accent);
+  color: var(--accent-highlight);
+}
+
+.outline:hover {
+  background-color: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+.ghost:hover {
+  color: var(--accent-soft);
+  background-color: rgba(223, 182, 178, 0.05);
+}
+
+.sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8125rem;
+}
+
+.md {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9375rem;
+}
+
+.lg {
+  padding: 0.8rem 1.75rem;
+  font-size: 1rem;
+}
+
+.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

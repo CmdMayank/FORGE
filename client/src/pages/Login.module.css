@@ -1,0 +1,142 @@
+.page {
+  min-height: calc(100vh - 72px);
+  display: flex;
+}
+
+.splitLayout {
+  display: flex;
+  width: 100%;
+}
+
+/* Left Panel */
+.visualPanel {
+  display: none;
+  flex: 1;
+  background-color: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .visualPanel {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.visualContent {
+  position: relative;
+  z-index: 2;
+  max-width: 400px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 3rem;
+  display: block;
+}
+
+.dot { color: var(--accent); }
+
+.visualTitle {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--accent-highlight);
+}
+
+.visualText {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 50%, rgba(133, 79, 108, 0.15) 0%, transparent 70%);
+}
+
+.badgeCloud {
+  margin-top: 4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.floatingBadge {
+  display: inline-block;
+}
+
+/* Right Panel */
+.formPanel {
+  flex: 1;
+  background-color: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 420px;
+}
+
+.formHeader {
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-highlight);
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.forgotPass {
+  text-align: right;
+}
+
+.forgotPass a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.submitBtn {
+  margin-top: 1rem;
+}
+
+.footerText {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.footerText a {
+  color: var(--accent-soft);
+  font-weight: 500;
+}
+
+.footerText a:hover {
+  text-decoration: underline;
+}

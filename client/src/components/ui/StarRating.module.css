@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star {
+  stroke-width: 1.5;
+}
+
+.filled {
+  fill: var(--rank-lead);
+  color: var(--rank-lead);
+}
+
+.empty {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+
+.interactive {
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.interactive:hover {
+  transform: scale(1.2);
+}
+
+.text {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--accent-highlight);
+  margin-left: 0.5rem;
+}

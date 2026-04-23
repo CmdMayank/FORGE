@@ -1,0 +1,21 @@
+.tag {
+  display: inline-flex;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.default {
+  background-color: var(--bg-surface);
+  color: var(--accent-soft);
+  border: 1px solid var(--border-subtle);
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent-highlight);
+}

@@ -1,0 +1,123 @@
+.footer {
+  background-color: var(--bg-deep);
+  border-top: 1px solid var(--border-subtle);
+  padding: 5rem 0 2rem;
+  margin-top: auto;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, 1fr);
+  gap: 3rem;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.dot {
+  color: var(--accent);
+}
+
+.description {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  max-width: 300px;
+  margin-bottom: 2rem;
+}
+
+.socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.socialLink:hover {
+  color: var(--accent);
+}
+
+.columnTitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.footerLink {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: 0.75rem;
+  transition: var(--transition);
+}
+
+.footerLink:hover {
+  color: var(--accent-soft);
+  transform: translateX(4px);
+}
+
+.bottom {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+.copyright {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  font-family: var(--font-mono);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--rank-junior);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--rank-junior);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--rank-junior);
+}

@@ -1,0 +1,560 @@
+{
+  "project": "F.O.R.G.E.",
+  "full_name": "Freelance Opportunities Ranked by Growth & Expertise",
+  "tagline": "The right projects for the right developers",
+  "model": "gemini-2.0-flash",
+  "architecture": "React 18 (Vite) + Node.js/Express + MongoDB",
+
+  "design_system": {
+    "theme": "dark",
+    "inspiration": "Images show: deep purple-to-black dark theme (Web3 agency + color palette), bold editorial typography (Wen Launch), sci-fi dashboard with glowing accents (SciFi admin). FORGE should feel like a premium developer platform — dark, sharp, slightly futuristic but not neon-heavy.",
+
+    "palette": {
+      "bg_deep": "#190019",
+      "bg_dark": "#0D000D",
+      "bg_surface": "#2B124C",
+      "bg_card": "#1A0A2E",
+      "bg_card_hover": "#22103A",
+      "accent_primary": "#854F6C",
+      "accent_soft": "#DFB6B2",
+      "accent_highlight": "#FBE4D8",
+      "border_subtle": "rgba(133, 79, 108, 0.25)",
+      "border_glow": "rgba(133, 79, 108, 0.6)",
+      "text_primary": "#FBE4D8",
+      "text_secondary": "#DFB6B2",
+      "text_muted": "#854F6C",
+      "text_on_accent": "#190019",
+      "rank_colors": {
+        "Apprentice": "#6B7280",
+        "Junior": "#34D399",
+        "Mid": "#60A5FA",
+        "Senior": "#A78BFA",
+        "Lead": "#FBBF24",
+        "Architect": "#F87171",
+        "Principal": "#FCD34D"
+      },
+      "status_colors": {
+        "open": "#34D399",
+        "in_progress": "#60A5FA",
+        "completed": "#A78BFA",
+        "cancelled": "#F87171",
+        "pending": "#FBBF24",
+        "accepted": "#34D399",
+        "rejected": "#F87171"
+      }
+    },
+
+    "typography": {
+      "display": "'Syne', sans-serif",
+      "body": "'DM Sans', sans-serif",
+      "mono": "'JetBrains Mono', monospace",
+      "google_fonts": "https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap",
+      "scale": {
+        "hero": "clamp(3rem, 8vw, 7rem)",
+        "h1": "clamp(2rem, 5vw, 4rem)",
+        "h2": "clamp(1.5rem, 3vw, 2.5rem)",
+        "h3": "1.25rem",
+        "body": "1rem",
+        "small": "0.875rem",
+        "mono": "0.875rem"
+      },
+      "weights": {
+        "display_heading": 800,
+        "section_heading": 700,
+        "label": 600,
+        "body": 400,
+        "light": 300
+      }
+    },
+
+    "animation": {
+      "gsap": {
+        "defaults": { "ease": "power3.out", "duration": 0.7 },
+        "hero_text": "SplitText word-by-word stagger 0.06s, y:60 → 0, opacity 0→1",
+        "scroll_reveal": "ScrollTrigger, y:40→0, opacity 0→1, stagger 0.1s, start: top 85%",
+        "count_up": "ScrollTrigger onEnter, gsap.to counter object, duration 2, ease power1.out",
+        "navbar_scroll": "ScrollTrigger, background #190019 → rgba(13,0,13,0.95) + blur + border-bottom",
+        "floating_cards": "gsap.to yoyo:true, y:-12, duration 3, stagger 0.4s, ease sine.inOut",
+        "line_draw": "strokeDashoffset animation via ScrollTrigger when rank section enters"
+      },
+      "framer_motion": {
+        "card_hover": "whileHover: { y: -4, boxShadow: '0 8px 32px rgba(133,79,108,0.3)' }, transition: { duration: 0.2 }",
+        "button_tap": "whileTap: { scale: 0.97 }",
+        "page_transition": "AnimatePresence with opacity 0→1, y 20→0, duration 0.4",
+        "form_fields": "variants stagger children 0.05s, y 20→0 opacity 0→1",
+        "modal": "scale 0.95→1, opacity 0→1 on mount",
+        "list_items": "staggerChildren 0.08s from parent"
+      }
+    },
+
+    "components": {
+      "card": "bg: var(--bg-card), border: 1px solid var(--border-subtle), border-radius: 16px, backdrop: none — NO glassmorphism",
+      "card_glow": "on hover: border-color → var(--border-glow), box-shadow: 0 0 24px rgba(133,79,108,0.15)",
+      "button_primary": "bg: var(--accent-primary), color: var(--text-on-accent), font-weight:600, border-radius:8px, padding: 12px 24px",
+      "button_outline": "bg: transparent, border: 1px solid var(--border-glow), color: var(--text-primary), hover: bg var(--bg-card)",
+      "button_ghost": "bg: transparent, color: var(--text-secondary), hover: color var(--text-primary)",
+      "input": "bg: rgba(43,18,76,0.5), border: 1px solid var(--border-subtle), color: var(--text-primary), focus: border-color var(--accent-primary), border-radius:8px, padding: 12px 16px",
+      "badge_rank": "font-family: mono, font-size: 11px, letter-spacing: 0.08em, padding: 4px 10px, border-radius: 6px, border: 1px solid currentColor",
+      "skill_tag": "bg: rgba(133,79,108,0.15), color: var(--accent-soft), border: 1px solid rgba(133,79,108,0.3), border-radius:6px, font-size:13px, padding:4px 10px",
+      "divider": "1px solid rgba(133,79,108,0.15)",
+      "scrollbar": "::-webkit-scrollbar { width:4px } track: #190019 thumb: #854F6C"
+    },
+
+    "layout": {
+      "max_width": "1280px",
+      "navbar_height": "64px",
+      "sidebar_width": "240px",
+      "section_padding": "clamp(4rem, 8vw, 8rem) 0",
+      "container": "max-width:1280px, margin:0 auto, padding:0 clamp(1rem,4vw,2rem)",
+      "grid_projects": "repeat(auto-fill, minmax(320px, 1fr))",
+      "grid_stats": "repeat(4, 1fr) → mobile: repeat(2,1fr)"
+    },
+
+    "effects": {
+      "allowed": [
+        "Subtle radial gradient bg: radial-gradient(ellipse at top, #2B124C 0%, #190019 60%)",
+        "Border glow on hover",
+        "Text glow on headings: text-shadow 0 0 40px rgba(251,228,216,0.15)",
+        "Noise texture overlay at 3% opacity for depth",
+        "Scrolling marquee ticker for categories/tags",
+        "Cursor dot follower (optional, CSS only)"
+      ],
+      "forbidden": [
+        "Heavy glassmorphism blur",
+        "Rainbow/neon color cycling",
+        "Gradient text on body copy",
+        "Animated gradient backgrounds (performance)",
+        "Box shadows > 40px spread",
+        "White or very light backgrounds anywhere"
+      ]
+    }
+  },
+
+  "frontend_prompt": {
+    "instruction_to_gemini": "You are building the complete React frontend for F.O.R.G.E. — a dark-themed developer freelancing platform. Use the design_system above for ALL styling decisions. The project folder is named 'client' (Vite + React 18). Generate complete, working, production-ready code for each file requested. Never use placeholder lorem ipsum. Always wire to the real backend API via the services layer.",
+
+    "project_setup": {
+      "folder": "client/",
+      "commands": [
+        "npm create vite@latest client -- --template react",
+        "cd client",
+        "npm install axios react-router-dom framer-motion gsap lucide-react react-hot-toast recharts"
+      ],
+      "index_html_head": [
+        "<link rel='preconnect' href='https://fonts.googleapis.com'>",
+        "<link href='https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap' rel='stylesheet'>",
+        "<title>F.O.R.G.E. — The right projects for the right developers</title>"
+      ]
+    },
+
+    "folder_structure": {
+      "client/src/": {
+        "main.jsx": "Entry — wrap App in BrowserRouter + AuthProvider + Toaster",
+        "App.jsx": "All routes defined here with ProtectedRoute wrappers",
+        "styles/": {
+          "globals.css": "CSS variables, resets, scrollbar, body bg, typography base",
+          "animations.css": "Keyframe animations: fadeIn, slideUp, pulse-glow"
+        },
+        "context/": {
+          "AuthContext.jsx": "currentUser, token, login(), logout(), register(), loading state"
+        },
+        "services/": {
+          "api.js": "Axios instance, baseURL=http://localhost:5000/api, request interceptor adds Bearer token from localStorage",
+          "authService.js": "login(email,pwd), register(data), getMe()",
+          "projectService.js": "getProjects(filters), getProject(id), createProject(data), submitProposal(id,data), acceptProposal(id,pid,status), completeProject(id,rating)",
+          "userService.js": "getProfile(id), updateProfile(id,data), getLeaderboard()",
+          "reviewService.js": "postReview(data), getUserReviews(id)"
+        },
+        "hooks/": {
+          "useAuth.js": "Returns useContext(AuthContext)",
+          "useDebounce.js": "Generic debounce hook, delay 300ms",
+          "useProjects.js": "Fetches projects with filter state, pagination, loading/error"
+        },
+        "utils/": {
+          "rankUtils.js": "RANKS array, RANK_COLORS map, getRankIndex(rank), canApply(userRank, requiredRank), getRankProgress(score)",
+          "formatters.js": "formatCurrency(n), formatDate(d), formatRelativeTime(d), truncate(str,n)",
+          "validators.js": "validateEmail(s), validatePassword(s), validateRequired(s)"
+        },
+        "components/": {
+          "layout/": {
+            "Navbar.jsx": "See spec below",
+            "Footer.jsx": "See spec below",
+            "PageWrapper.jsx": "Framer Motion page transition wrapper, div with animate/exit"
+          },
+          "ui/": {
+            "Button.jsx": "Props: variant(primary|outline|ghost), size(sm|md|lg), loading, disabled, onClick, children",
+            "Input.jsx": "Props: label, name, type, value, onChange, error, placeholder, icon",
+            "RankBadge.jsx": "Props: rank — renders colored mono pill with rank name",
+            "SkillTag.jsx": "Props: skill, onRemove(optional)",
+            "ProgressRing.jsx": "SVG circle progress — props: percent, size, color, label",
+            "Modal.jsx": "Framer Motion overlay + centered card, props: isOpen, onClose, title, children",
+            "Loader.jsx": "Centered spinning ring using accent color",
+            "StatusChip.jsx": "Props: status — maps to color from status_colors palette",
+            "StarRating.jsx": "Props: rating(1-5), interactive(bool), onChange",
+            "TagInput.jsx": "Input that adds/removes skill tags on Enter/backspace"
+          },
+          "auth/": {
+            "ProtectedRoute.jsx": "If !currentUser redirect to /login, else render Outlet"
+          },
+          "dashboard/": {
+            "StatsCard.jsx": "Props: label, value, icon, trend — dark card with mono value display",
+            "RankTracker.jsx": "Current rank, progress bar to next rank, score display",
+            "ActivityFeed.jsx": "List of recent actions with timestamp and icon"
+          },
+          "projects/": {
+            "ProjectCard.jsx": "See spec below",
+            "FilterPanel.jsx": "See spec below",
+            "ProposalForm.jsx": "See spec below",
+            "ProposalItem.jsx": "Developer info, bid, cover letter preview, accept/reject buttons (client view)"
+          },
+          "profile/": {
+            "ReviewCard.jsx": "Star rating + comment + reviewer name + date"
+          }
+        },
+        "pages/": {
+          "Home.jsx": "See full spec below",
+          "Login.jsx": "See full spec below",
+          "Register.jsx": "See full spec below",
+          "Dashboard.jsx": "See full spec below",
+          "Projects.jsx": "See full spec below",
+          "ProjectDetail.jsx": "See full spec below",
+          "PostProject.jsx": "See full spec below",
+          "Profile.jsx": "See full spec below",
+          "Leaderboard.jsx": "Top 10 devs table with rank badges and stats",
+          "NotFound.jsx": "404 — large text, back home button"
+        }
+      }
+    },
+
+    "globals_css": {
+      "file": "src/styles/globals.css",
+      "content": ":root { --bg-deep: #190019; --bg-dark: #0D000D; --bg-surface: #2B124C; --bg-card: #1A0A2E; --bg-card-hover: #22103A; --accent: #854F6C; --accent-soft: #DFB6B2; --accent-highlight: #FBE4D8; --border-subtle: rgba(133,79,108,0.25); --border-glow: rgba(133,79,108,0.6); --text: #FBE4D8; --text-secondary: #DFB6B2; --text-muted: #854F6C; --text-on-accent: #190019; --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif; --font-mono: 'JetBrains Mono', monospace; --radius-sm: 6px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px; --transition: 200ms ease; } *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; } html { scroll-behavior: smooth; } body { background: var(--bg-dark); background-image: radial-gradient(ellipse at 50% 0%, #2B124C 0%, #0D000D 65%); background-attachment: fixed; color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; min-height: 100vh; } h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; color: var(--text); } a { color: inherit; text-decoration: none; } img { max-width: 100%; display: block; } button { cursor: pointer; font-family: var(--font-body); } input, textarea, select { font-family: var(--font-body); } .container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1rem,4vw,2rem); } ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: var(--bg-dark); } ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; } ::selection { background: rgba(133,79,108,0.4); color: var(--text); }"
+    },
+
+    "component_specs": {
+
+      "Navbar": {
+        "structure": "Fixed top, full-width, height 64px",
+        "left": "F.O.R.G.E. logo — Syne font, weight 800, size 20px, accent-highlight color",
+        "center": "Nav links: Home, Projects, Leaderboard — hidden on mobile",
+        "right": "If logged out: Login + Register buttons. If logged in: rank badge + avatar circle + username + dropdown (Dashboard, Profile, Logout)",
+        "scroll_behavior": "GSAP ScrollTrigger: at scrollY > 20 add class 'scrolled' → background rgba(13,0,13,0.95) + border-bottom 1px solid var(--border-subtle)",
+        "mobile": "Hamburger icon (lucide Menu), slide-down menu with Framer Motion"
+      },
+
+      "Footer": {
+        "structure": "Dark bg (#0D000D), border-top 1px solid var(--border-subtle), padding 48px 0 24px",
+        "columns": ["Brand: logo + tagline + social icons (Github, Twitter, LinkedIn)", "Platform: Projects, Post a Project, Leaderboard", "Company: About, How it Works, Contact"],
+        "bottom": "© 2025 F.O.R.G.E. All rights reserved. — center aligned, text-muted, font-size 13px"
+      },
+
+      "ProjectCard": {
+        "structure": "Dark card (--bg-card), border var(--border-subtle), border-radius 16px, padding 20px",
+        "top_row": "Category badge (left) + Required rank badge (right)",
+        "title": "Syne font, 18px, weight 700, 2 lines max, ellipsis",
+        "skills": "3 skill tags max, then '+N more'",
+        "meta_row": "Budget range (accent-soft, mono font) | Timeline (days) | Complexity chip",
+        "bottom_row": "Client avatar + name (left) | Proposal count (lucide Users icon) | Apply button (right)",
+        "hover": "Framer Motion: y -4, border-color → var(--border-glow), shadow 0 8px 32px rgba(133,79,108,0.2)",
+        "rank_gate": "If developer's rank < required rank: Apply button is disabled, tooltip 'Requires [Rank] or above', button color muted"
+      },
+
+      "FilterPanel": {
+        "structure": "240px wide sidebar (desktop), collapsible drawer on mobile",
+        "filters": [
+          "Search: text input with debounce",
+          "Category: list of radio/pill buttons",
+          "Required Rank: 7 rank pill buttons with colors",
+          "Budget: min/max number inputs",
+          "Complexity: Low/Medium/High/Expert pills",
+          "Sort: select dropdown"
+        ],
+        "clear": "Clear All filters link at top",
+        "style": "Each filter group has label (mono, uppercase, muted), 12px gap between groups"
+      },
+
+      "ProposalForm": {
+        "structure": "Card with heading 'Submit Your Proposal'",
+        "fields": [
+          "Bid Amount: number input with $ prefix",
+          "Estimated Days: number input with calendar icon",
+          "Cover Letter: textarea, 5 rows, 1000 char limit with counter"
+        ],
+        "submit": "Primary button 'Submit Proposal', disabled if already applied",
+        "already_applied": "Show green chip 'Proposal Submitted' with details instead of form"
+      }
+    },
+
+    "page_specs": {
+
+      "Home": {
+        "route": "/",
+        "sections": [
+          {
+            "id": "hero",
+            "height": "100vh, centered content",
+            "layout": "Two columns: left 55% text, right 45% visual",
+            "left_content": {
+              "eyebrow": "Small mono text 'DEVELOPER PLATFORM' with accent dot before it",
+              "heading": "Split into 3 lines: 'The right' / 'projects for' / 'right developers.' — Syne 800, hero scale. Last word 'developers.' in accent-soft color",
+              "subtext": "F.O.R.G.E. matches developers to projects by rank — no noise, no mismatches. Build your career, one project at a time.",
+              "ctas": "Row: Button primary 'Find Projects' → /projects | Button outline 'Post a Project' → /post-project"
+            },
+            "right_content": {
+              "description": "Stacked rank cards — 7 cards for each rank, staggered vertically like a cascading deck. Each card: rank name (mono), colored dot, example 'React Dashboard' or 'Blockchain Audit'. Connected by vertical dotted line",
+              "animation": "GSAP: cards float up/down with yoyo, stagger 0.4s per card"
+            },
+            "bg": "Radial gradient from purple center fading to dark",
+            "animation": "GSAP SplitText on heading words, stagger 0.06s on load"
+          },
+          {
+            "id": "ticker",
+            "description": "Full-width scrolling marquee: 'Web Development ✦ Mobile Dev ✦ DevOps / Cloud ✦ Machine Learning ✦ Blockchain ✦ Open Source ✦ Backend / API ✦ Game Development ✦' — repeating, slow scroll left. Border top and bottom 1px solid var(--border-subtle). Font mono uppercase.",
+            "animation": "CSS animation: @keyframes marquee, translateX 0 → -50%, 30s linear infinite"
+          },
+          {
+            "id": "how_it_works",
+            "description": "3-step cards horizontal. Numbered 01/02/03 in large mono accent-muted. Icon (lucide), title, description. Card bg --bg-card.",
+            "steps": [
+              { "num": "01", "icon": "ShieldCheck", "title": "Get Verified & Ranked", "desc": "Complete your profile, add your GitHub, and our system assigns your starting rank based on skills and experience." },
+              { "num": "02", "icon": "Target", "title": "Match to Projects", "desc": "Browse projects filtered to your rank. No juniors drowning in senior work, no seniors bored with beginner tasks." },
+              { "num": "03", "icon": "TrendingUp", "title": "Complete & Level Up", "desc": "Deliver quality work, earn reviews, and watch your rank score climb. Better ranks unlock higher-paying projects." }
+            ],
+            "animation": "GSAP ScrollTrigger: cards stagger reveal from y:50"
+          },
+          {
+            "id": "rank_system",
+            "description": "Section heading 'The Rank System'. Horizontal track of 7 rank nodes connected by line. Each node: colored circle (rank color), rank name below, score threshold below that. Active rank on hover shows tooltip: example project types + score range.",
+            "animation": "GSAP ScrollTrigger: SVG line draws left→right as section enters. Nodes fade in with stagger after line completes."
+          },
+          {
+            "id": "featured_projects",
+            "description": "Section heading 'Open Projects Right Now'. Fetches GET /api/projects?status=open&limit=3. Shows 3 ProjectCards in a row. Below: 'View All Projects' button → /projects. If fetch fails, show 3 skeleton cards.",
+            "animation": "Framer Motion stagger 0.1s on cards"
+          },
+          {
+            "id": "stats",
+            "description": "Full-width dark strip (#0D000D). 4 stat blocks: '500+ Developers', '1,200+ Projects Completed', '$2M+ Paid Out', '7 Rank Levels'. Each: large mono number (accent-highlight), label below (text-muted).",
+            "animation": "GSAP countUp when in viewport"
+          },
+          {
+            "id": "cta_bottom",
+            "description": "Centered block: heading 'Ready to forge your career?' body 'Join hundreds of developers already building their reputation on F.O.R.G.E.' CTA button 'Create Your Account' → /register. Background: slightly lighter card feel.",
+            "animation": "Framer Motion fade + scale on viewport enter"
+          }
+        ]
+      },
+
+      "Login": {
+        "route": "/login",
+        "layout": "Full height split: left 45% dark panel, right 55% form panel",
+        "left_panel": {
+          "bg": "#0D000D with radial purple gradient",
+          "content": "FORGE logo top-left. Center: large quote or tagline. Bottom: 3 rank badge examples stacked with floating animation"
+        },
+        "right_panel": {
+          "bg": "var(--bg-deep)",
+          "content": "Heading 'Welcome back', subtext 'Sign in to your account'. Email + Password inputs. 'Forgot password?' link (muted). Submit button primary full-width 'Sign In'. Bottom: 'Don't have an account? Register →'"
+        },
+        "on_success": "Store token in localStorage key 'forge_token', update AuthContext, navigate to /dashboard",
+        "animation": "Framer Motion stagger on form fields"
+      },
+
+      "Register": {
+        "route": "/register",
+        "layout": "Same split as Login",
+        "left_panel": "Same as Login with different headline: 'Join the Forge'",
+        "right_panel": {
+          "step_1": "Role selector — two large cards: 'I am a Developer' (code icon) and 'I am a Client' (briefcase icon). Selected card gets border-glow. Heading 'How will you use FORGE?'",
+          "step_2_developer": "Name, Email, Password inputs. Skills tag input (add skills with Enter). Bio textarea (optional). GitHub URL input.",
+          "step_2_client": "Name, Email, Password inputs. Company/Project description (optional).",
+          "navigation": "Back button + Continue/Register button. Step indicator dots."
+        },
+        "animation": "Framer Motion AnimatePresence slide between steps"
+      },
+
+      "Dashboard": {
+        "route": "/dashboard",
+        "layout": "Full page with top navbar. Main content in container.",
+        "developer_view": {
+          "welcome": "Good morning/afternoon [Name], current rank badge inline",
+          "stats_row": "4 StatsCards: Rank Score (mono number), Projects Done, Success Rate %, Total Earned ($). Grid 4 cols.",
+          "rank_tracker": "RankTracker component — current rank, progress bar to next rank, score needed, next rank name",
+          "recommended": "Section 'Projects For You' — 3 ProjectCards filtered by user rank (GET /api/projects?requiredRank=userRank&status=open&limit=3)",
+          "my_proposals": "Table/list: Project Title | Bid | Status chip | Date | View link. Status: pending/accepted/rejected",
+          "activity": "ActivityFeed — recent actions"
+        },
+        "client_view": {
+          "welcome": "Same welcome",
+          "stats_row": "Projects Posted, Proposals Received, Active Projects, Completed",
+          "my_projects": "List of projects with: title, status chip, proposal count badge, Edit and View links. Empty state: 'Post your first project' CTA",
+          "post_cta": "Card with dashed border and + icon: 'Post a New Project'"
+        }
+      },
+
+      "Projects": {
+        "route": "/projects",
+        "layout": "Sidebar (FilterPanel 240px) + main content area",
+        "features": [
+          "Debounced search at top of main area",
+          "Results count: 'Showing X projects'",
+          "Project grid — 2 cols desktop, 1 mobile (--grid-projects)",
+          "Pagination: prev/next + page numbers, 12 per page",
+          "Loading: skeleton cards (pulse animation)",
+          "Empty state: icon + 'No projects match your filters'"
+        ],
+        "api_call": "GET /api/projects with all filter params as query string"
+      },
+
+      "ProjectDetail": {
+        "route": "/projects/:id",
+        "layout": "2 column: left 65% main content, right 35% sidebar",
+        "main": [
+          "Breadcrumb: Projects > [title]",
+          "Status chip + Category badge row",
+          "Title (Syne, h1)",
+          "Client info row: avatar + name + 'posted X days ago'",
+          "Divider",
+          "Description section (render as HTML, allow basic formatting)",
+          "Required Skills: SkillTag components",
+          "Complexity badge"
+        ],
+        "sidebar": [
+          "Budget card: min–max range, mono font, large",
+          "Timeline card: X days, Calendar icon",
+          "Required Rank card: large RankBadge + description",
+          "For developer: ProposalForm (if rank qualifies) or locked state",
+          "For client (own project): Proposal list with accept/reject"
+        ],
+        "proposals_section_client": "Below main content on mobile. Tabs: Proposals ([count]) | Details. ProposalItem components."
+      },
+
+      "PostProject": {
+        "route": "/post-project",
+        "access": "client role only, redirect developer to /projects",
+        "layout": "Centered card, max-width 720px, 3-step form",
+        "step_indicator": "3 dots/steps at top: Basics → Requirements → Review",
+        "step_1_basics": {
+          "fields": ["Project Title (text, required)", "Description (textarea, 10 rows, required)", "Category (select, 9 options)"]
+        },
+        "step_2_requirements": {
+          "fields": ["Required Rank (7 rank cards to pick from, with descriptions)", "Skills (TagInput)", "Budget Min + Max (side by side number inputs)", "Timeline days (number)", "Complexity (Low/Medium/High/Expert pill selector)"]
+        },
+        "step_3_review": "Preview card showing all entered data. Confirm and Post button (primary, full-width).",
+        "animation": "Framer Motion AnimatePresence: slide left/right between steps"
+      },
+
+      "Profile": {
+        "route": "/profile/:id",
+        "layout": "Hero section + content below",
+        "hero": "Avatar (80px circle, initials fallback), Name (Syne h1), Rank badge, join date. If own profile: 'Edit Profile' button top-right",
+        "stats_row": "4 cards: Rank Score, Completed, Success Rate, Earned",
+        "rank_progress": "ProgressRing SVG (GSAP animate stroke on mount) + rank name + next rank",
+        "bio": "Bio text. GitHub/Portfolio links with icons.",
+        "skills": "All skill tags",
+        "reviews": "ReviewCard list from GET /api/reviews/user/:id. Average star rating at top. Empty state: 'No reviews yet'",
+        "edit_modal": "Modal with: name, bio, skills (TagInput), githubUrl, portfolioUrl, avatar URL fields. Save button calls PUT /api/users/:id"
+      },
+
+      "Leaderboard": {
+        "route": "/leaderboard",
+        "layout": "Full page, container",
+        "heading": "Developer Leaderboard",
+        "table": "Rank # | Avatar + Name | Rank Badge | Rank Score | Projects Done | Success Rate. Alternating row backgrounds. Top 3 get medal icons (Gold/Silver/Bronze).",
+        "api": "GET /api/users/leaderboard"
+      }
+    },
+
+    "services_code": {
+      "api_js": "import axios from 'axios'; const api = axios.create({ baseURL: 'http://localhost:5000/api' }); api.interceptors.request.use(config => { const token = localStorage.getItem('forge_token'); if (token) config.headers.Authorization = `Bearer ${token}`; return config; }); api.interceptors.response.use(res => res, err => { if (err.response?.status === 401) { localStorage.removeItem('forge_token'); window.location.href = '/login'; } return Promise.reject(err); }); export default api;",
+
+      "authService_js": "import api from './api'; export const login = (email, password) => api.post('/auth/login', { email, password }); export const register = (data) => api.post('/auth/register', data); export const getMe = () => api.get('/auth/me');",
+
+      "projectService_js": "import api from './api'; export const getProjects = (params) => api.get('/projects', { params }); export const getProject = (id) => api.get(`/projects/${id}`); export const createProject = (data) => api.post('/projects', data); export const submitProposal = (id, data) => api.post(`/projects/${id}/proposals`, data); export const updateProposal = (id, pid, data) => api.put(`/projects/${id}/proposals/${pid}`, data); export const completeProject = (id, rating) => api.put(`/projects/${id}/complete`, { rating });",
+
+      "userService_js": "import api from './api'; export const getProfile = (id) => api.get(`/users/${id}`); export const updateProfile = (id, data) => api.put(`/users/${id}`, data); export const getLeaderboard = () => api.get('/users/leaderboard');",
+
+      "reviewService_js": "import api from './api'; export const postReview = (data) => api.post('/reviews', data); export const getUserReviews = (id) => api.get(`/reviews/user/${id}`);"
+    },
+
+    "authContext_spec": {
+      "file": "src/context/AuthContext.jsx",
+      "state": "{ currentUser, token, loading }",
+      "methods": {
+        "login": "Calls authService.login, stores token in localStorage('forge_token'), sets currentUser, returns user",
+        "register": "Calls authService.register, stores token, sets currentUser",
+        "logout": "Removes token from localStorage, sets currentUser to null, navigate to /",
+        "init": "On mount: if token exists in localStorage, call authService.getMe() to restore session. Set loading false after."
+      },
+      "provide": "All state + methods via context"
+    },
+
+    "rankUtils_spec": {
+      "file": "src/utils/rankUtils.js",
+      "exports": {
+        "RANKS": "['Apprentice','Junior','Mid','Senior','Lead','Architect','Principal']",
+        "RANK_THRESHOLDS": "[0, 50, 200, 500, 1200, 2500, 5000]",
+        "RANK_COLORS": "{ Apprentice:'#6B7280', Junior:'#34D399', Mid:'#60A5FA', Senior:'#A78BFA', Lead:'#FBBF24', Architect:'#F87171', Principal:'#FCD34D' }",
+        "getRankIndex": "(rank) => RANKS.indexOf(rank)",
+        "canApply": "(userRank, requiredRank) => getRankIndex(userRank) >= getRankIndex(requiredRank)",
+        "getRankProgress": "(score) => { find current rank threshold index, return { rank, nextRank, progressPercent, scoreToNext } }"
+      }
+    },
+
+    "app_jsx_routes": {
+      "file": "src/App.jsx",
+      "structure": "import Routes, Route, Navigate from react-router-dom. Wrap protected routes in ProtectedRoute.",
+      "routes": [
+        "/ → Home (public)",
+        "/login → Login (redirect to /dashboard if logged in)",
+        "/register → Register (redirect to /dashboard if logged in)",
+        "/projects → Projects (protected)",
+        "/projects/:id → ProjectDetail (protected)",
+        "/post-project → PostProject (protected, client only)",
+        "/dashboard → Dashboard (protected)",
+        "/profile/:id → Profile (protected)",
+        "/leaderboard → Leaderboard (protected)",
+        "* → NotFound"
+      ]
+    },
+
+    "how_to_generate_with_gemini": {
+      "strategy": "Send this entire JSON as system context. Then request one file at a time using the file path as the prompt. Example: 'Generate the complete code for src/context/AuthContext.jsx based on the authContext_spec and design_system in the system prompt.'",
+      "order": [
+        "1. src/styles/globals.css",
+        "2. src/utils/rankUtils.js",
+        "3. src/utils/formatters.js",
+        "4. src/services/api.js",
+        "5. src/services/authService.js + projectService.js + userService.js + reviewService.js",
+        "6. src/context/AuthContext.jsx",
+        "7. src/hooks/useAuth.js + useDebounce.js",
+        "8. src/components/ui/Button.jsx",
+        "9. src/components/ui/Input.jsx",
+        "10. src/components/ui/RankBadge.jsx",
+        "11. src/components/ui/Modal.jsx + Loader.jsx + StatusChip.jsx + ProgressRing.jsx + StarRating.jsx + TagInput.jsx + SkillTag.jsx",
+        "12. src/components/auth/ProtectedRoute.jsx",
+        "13. src/components/layout/Navbar.jsx",
+        "14. src/components/layout/Footer.jsx",
+        "15. src/components/layout/PageWrapper.jsx",
+        "16. src/components/dashboard/StatsCard.jsx + RankTracker.jsx + ActivityFeed.jsx",
+        "17. src/components/projects/ProjectCard.jsx",
+        "18. src/components/projects/FilterPanel.jsx",
+        "19. src/components/projects/ProposalForm.jsx + ProposalItem.jsx",
+        "20. src/components/profile/ReviewCard.jsx",
+        "21. src/App.jsx",
+        "22. src/main.jsx",
+        "23. src/pages/Home.jsx",
+        "24. src/pages/Login.jsx",
+        "25. src/pages/Register.jsx",
+        "26. src/pages/Dashboard.jsx",
+        "27. src/pages/Projects.jsx",
+        "28. src/pages/ProjectDetail.jsx",
+        "29. src/pages/PostProject.jsx",
+        "30. src/pages/Profile.jsx",
+        "31. src/pages/Leaderboard.jsx",
+        "32. src/pages/NotFound.jsx"
+      ],
+      "per_file_instruction": "For each file say: 'Generate complete working code for [filepath]. Use CSS Modules for component styles (create the .module.css file too). Follow the design_system exactly — dark theme, purple palette, Syne/DM Sans fonts, GSAP + Framer Motion animations as specified. Wire all API calls to the services layer. Handle loading and error states. Make it fully responsive. No placeholder data — fetch from the real backend.'"
+    }
+  }
+}
